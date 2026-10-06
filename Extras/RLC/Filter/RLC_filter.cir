@@ -1,0 +1,14 @@
+.title Dual RC band stop filter
+
+V1 in 0 dc 0 ac 1
+R1 out in 100
+C1 out n1 100n
+L1 n1 0 100m
+
+.control
+ac dec 1000 10 1meg
+plot db(v(out)/v(in))
+plot phase(v(out)/v(in))
+.endc
+
+.end

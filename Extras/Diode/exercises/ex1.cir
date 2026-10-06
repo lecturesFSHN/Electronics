@@ -1,0 +1,16 @@
+.title kot
+
+V1 n1 0 -6
+R1 n1 n2 0.5k
+R2 n2 n4 1k
+V2 n4 0 9
+*D1 n2 n3 1N4148
+R3 n3 0 0.2k
+
+.MODEL 1N4148 D (Is=222P N=1.65 Cj0=4P M=0.333 Vj=0.7 Fc=0.5 Rs=68.6M Tt=5.76N Ikf=26.85 Kf=0 Af=1 Bv=75 Ibv=0 Xti=3.0 Eg=1.11 Tcv=0.0 Trs=0.0 Ttt1=0.0 Ttt2=0.0 Tm1=0.0 Tm2=0.0 Tnom=26.85 )
+
+.control
+op
+print v(n2,n3), v(n2), v(n3)
+.endc
+.end

@@ -1,0 +1,28 @@
+* Qucs 25.1.2  /home/drago/TEACHING/TEACH/Electronics/Extras/npn.sch
+.INCLUDE "/tmp/.mount_Qucs-SpoEBDi/usr/share/qucs-s/xspice_cmlib/include/ngspice_mathfunc.inc"
+QT1 _net1 _net0 0 QMOD_T1 AREA=1.0
+.MODEL QMOD_T1 npn (Is=1E-14 Nf=1 Nr=1 Ikf=0 Ikr=0 Vaf=0 Var=0 Ise=0 Ne=1.5 Isc=0 Nc=2 Bf=100 Br=1 Rbm=0 Irb=0 Rc=0 Re=0 Rb=0 Cje=0 Vje=0.75 Mje=0.33 Cjc=0 Vjc=0.75 Mjc=0.33 Xcjc=1.0 Cjs=0 Vjs=0.75 Mjs=0 Fc=0.5 Tf=0.0 Xtf=0.0 Vtf=0.0 Itf=0.0 Tr=0.0 Kf=0.0 Af=1.0 Ptf=0.0 Xtb=0.0 Xti=3.0 Eg=1.11 Tnom=26.85 )
+EV_ce V_ce 0 _net1 0 1.0
+RV_ceV_ce V_ce 0 1E8
+RV_ce_net1 _net1 0 1E8
+VI_c _net3 _net1 DC 0
+VI_b _net4 _net0 DC 0
+V1 _net2 0 DC 12
+Rc _net3 _net2  1K tc1=0.0 tc2=0.0 
+I1 0 _net4 DC 0.5M
+R2 _net4 _net2  8K tc1=0.0 tc2=0.0 
+R3 0 _net4  1.K tc1=0.0 tc2=0.0 
+EVb Vb 0 _net4 0 1.0
+RVbVb Vb 0 1E8
+RVb_net4 _net4 0 1E8
+
+.control
+
+op
+print i(VI_b) i(VI_c) v(V_ce) v(Vb)   > spice4qucs.dc1.ngspice.dc.print
+destroy all
+reset
+
+exit
+.endc
+.END

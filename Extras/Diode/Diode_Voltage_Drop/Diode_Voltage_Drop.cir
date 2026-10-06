@@ -1,0 +1,17 @@
+.title Voltage_Drop
+V1 n1 0 DC 0 SIN(0 5 50 0 0 0) AC 5 ACPHASE 0
+D1 n1 n2 1N4148
+D2 n2 n3 1N4148
+D3 n3 n4 1N4148
+D4 n4 n5 1N4148
+R1 n5 0  330
+
+.MODEL 1N4148 D (Is=222P N=1.65 Cj0=4P M=0.333 Vj=0.7 Fc=0.5 Rs=68.6M Tt=5.76N Ikf=26.85 Kf=0 Af=1 Bv=75 Ibv=0 Xti=3.0 Eg=1.11 Tcv=0.0 Trs=0.0 Ttt1=0.0 Ttt2=0.0 Tm1=0.0 Tm2=0.0 Tnom=26.85 )
+
+.control
+tran 2.0e-06 0.05  
+#plot v(n1)-v(n2), v(n2)-v(n3), v(n3)-v(n4), v(n4)-v(n5), v(n4)
+#plot v(n1), v(n2), v(n3), v(n4), v(n5)
+plot v(n1)-v(n2), v(n5)
+.endc
+.END

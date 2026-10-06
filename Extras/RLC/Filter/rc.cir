@@ -1,0 +1,23 @@
+* Qucs 25.1.2  /home/drago/TEACHING/TEACH/Electronics/Extras/filters.sch
+.INCLUDE "/tmp/.mount_Qucs-SFjEdDb/usr/share/qucs-s/xspice_cmlib/include/ngspice_mathfunc.inc"
+R2 0 n1  1K tc1=0.0 tc2=0.0 
+C1 vin1 vout1  100N 
+C2 n1 vout1  100N 
+R1 vin1 vout1  1K tc1=0.0 tc2=0.0 
+V1 vin1 0 DC 0 SIN(0 1 1K 0 0 0) AC 1 ACPHASE 0
+C3 n2 vout2  100N 
+R3 vin2 vout2  100 tc1=0.0 tc2=0.0 
+V2 vin2 0 DC 0 SIN(0 1 1K 0 0 0) AC 1 ACPHASE 0
+L1 0 _net_L1 L='100M'
+RL1 _net_L1 n2 R='8*atan(1)*(100M)*(1K)/(10000)'
+
+.control
+
+ac dec 200 10 1meg 
+write spice4qucs.ac1.plot v(n1) v(n2) v(vin1) v(vin2) v(vout1) v(vout2)
+destroy all
+reset
+
+exit
+.endc
+.END

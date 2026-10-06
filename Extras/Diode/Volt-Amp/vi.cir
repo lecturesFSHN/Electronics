@@ -1,0 +1,21 @@
+.title V-I_characteristics
+
+V1 1 0 dc 0 sin(0 5 100 0 0 0) ac 5 acphase 0
+D1 1 2 1N4148
+R1 2 0 330
+
+.MODEL 1N4148 D (Is=222P N=1.65 Cj0=4P M=0.333 Vj=0.7 Fc=0.5 Rs=68.6M Tt=5.76N Ikf=26.85 Kf=0 Af=1 Bv=75 Ibv=0 Xti=3.0 Eg=1.11 Tcv=0.0 Trs=0.0 Ttt1=0.0 Ttt2=0.0 Tm1=0.0 Tm2=0.0 Tnom=26.85 )
+
+.control
+tran 1e-5 0.05
+*set filetype=binary
+set filetype=ascii
+*plot (1e3*v(2)/330) vs v(1, 2)
+plot v(2) VS v(1,2)
+write kot.dat v(1,2), v(2)
+*destroy all
+* reset
+* exit
+
+.endc
+.end
